@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+}
+
+/* CSS for FormLogin*/
+.login {
+  border: 5px double;
+  width: 80%;
+  margin: 5% auto;
+  padding-bottom: 3%;
+  background-color: aqua;
+}
+
+h1 {
+  font-size: 4rem;
+  text-decoration: wavy;
+  color: darkblue;
+}
+
+label {
+  font-size: 2rem;
+  padding: 2%;
+  margin-bottom: 3%;
+}
+
+input {
+  margin: 1%;
+  font-size: 1.5rem;
+  text-align: center;
+  color: whitesmoke;
+  background-color: rgb(163, 235, 248);
+}
+
+button {
+  width: 35%;
+  height: 7vh;
+  border-radius: 30px;
+  background-color: rgb(218, 103, 218);
+  font-size: 2rem;
+  margin: 2% auto;
+}
+
+/*CSS for Friend*/
+.friend {
+  border: 3px dotted blueviolet;
+  width: 50%;
+  margin: 3% auto;
+  padding: 1%;
+}
+
+h2 {
+  color: purple;
+  font-size: 2.5rem;
+}
+
+p {
+  color: lightcoral;
+  font-size: 2rem;
+  border: 3px double black;
+  width: 75%;
+  margin: 2% auto;
+  padding: 1%;
+}
