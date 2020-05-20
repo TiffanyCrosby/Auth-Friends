@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+// const token = {};
 
-export const FormLogin = () => {
-  const [loginInput, setLoginInput] = useState({ username: '', password: '' });
+export const FormLogin = (props) => {
+  const [loginInput, setLoginInput] = useState({});
   //   console.log(loginInput);
   const history = useHistory();
 
@@ -14,12 +15,12 @@ export const FormLogin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axiosWithAuth()
-      .post('/api/login', loginInput)
+    axios
+      .post('http://localhost:5000/api/login', loginInput)
       .then((res) => {
         console.log(res);
         localStorage.setItem('token', res.data.payload);
-        history.push('/friendList');
+        props.history.push('/friendList');
       })
       .catch((error) => console.log('Error from postLogin request ', error));
     setLoginInput({ username: '', password: '' });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import './App.css';
 
@@ -12,6 +12,12 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <ul>
+          <li>
+            <Link to="/login">To Login Page </Link>
+          </li>
+        </ul>
+
         <Switch>
           <PrivateRoute exact path="/friendList" component={FriendsList} />
           <PrivateRoute path="/addNewFriend" component={AddNewFriend} />

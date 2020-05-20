@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-export const AddNewFriend = () => {
-  const [addFriend, setAddFriend] = useState({ name: '', age: '', email: '' });
+export const AddNewFriend = ({ setFriends }) => {
+  const [addFriend, setAddFriend] = useState({});
   const history = useHistory();
 
   const handleOnChange = (event) => {
@@ -17,8 +17,8 @@ export const AddNewFriend = () => {
       .post('/api/friends', addFriend)
       .then((res) => {
         console.log('Response from AddNewFriend post request', res);
-        localStorage.setItem('token', res.data.payload);
-        history.push('/protected');
+        setFriends(res.data, addFriend);
+        history.push('/friendList');
       })
       .catch((error) =>
         console.log('Error from AddNewFriend post request ', error)

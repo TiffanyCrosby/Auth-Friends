@@ -7,6 +7,7 @@ import { AddNewFriend } from './AddNewFriend';
 
 export const FriendsList = () => {
   const [friends, setFriends] = useState([]);
+  // console.log({ friends });
 
   useEffect(() => {
     axiosWithAuth()
@@ -19,6 +20,29 @@ export const FriendsList = () => {
         console.log('Error from FriendsList get request', error)
       );
   }, []);
+
+  const deletehandleSubmit = (event) => {
+    event.preventDefault();
+    axiosWithAuth()
+      .delete('/api/friends/:id', friends)
+      .then((res) => {
+        console.log('Response from FriendsList delete request', res);
+        setFriends([
+          ...friends,
+          {
+            friends: friends.filter((besty) => {
+              if (besty.id === friends.id) {
+                return null;
+              } else return friends;
+            }),
+          },
+        ]);
+      })
+      .catch((error) =>
+        console.log('Error from FriendsList delet request ', error)
+      );
+    setFriends([]);
+  };
 
   return (
     <div>
@@ -36,8 +60,8 @@ export const FriendsList = () => {
           />
         );
       })}
-      <AddNewFriend />
-      <button>Delet A Mean Friend!</button>
+      <AddNewFriend setFriends={setFriends} />
+      <button onClick={deletehandleSubmit}>Delet A Mean Friend!</button>
     </div>
   );
 };
