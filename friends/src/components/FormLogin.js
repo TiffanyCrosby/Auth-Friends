@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 export const FormLogin = () => {
   const [loginInput, setLoginInput] = useState({ username: '', password: '' });
@@ -13,19 +14,19 @@ export const FormLogin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post('http://localhost:5000/api/login', loginInput)
+    axiosWithAuth()
+      .post('/api/login', loginInput)
       .then((res) => {
         console.log(res);
         localStorage.setItem('token', res.data.payload);
-        history.push('/protected');
+        history.push('/friendList');
       })
       .catch((error) => console.log('Error from postLogin request ', error));
     setLoginInput({ username: '', password: '' });
   };
 
   return (
-    <div className="login">
+    <form className="login" onSubmit={handleSubmit}>
       <h1>Log In to Adjust Your Friends!</h1>
       <label>
         Username:
@@ -47,7 +48,7 @@ export const FormLogin = () => {
           onChange={handleOnchange}
         />
       </label>
-      <button onClick={handleSubmit}>Log In</button>
-    </div>
+      <button type="submit">Log In</button>
+    </form>
   );
 };
